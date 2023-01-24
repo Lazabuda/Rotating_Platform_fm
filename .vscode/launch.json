@@ -3,13 +3,13 @@
         {
             "showDevDebugOutput": "parsed",
             "cwd": "${workspaceRoot}",
-            "executable": "./build/STM103.elf",
+            "executable": "./build/orange_pi_mezz_hal.elf",
             "name": "Debug STM32",
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "openocd",
             "preLaunchTask": "Build STM",
-            "device": "stm32f103x6.s",
+            "device": "stm32f401xc.s",
             "configFiles": [
                 "openocd.cfg"
             ]
@@ -17,13 +17,13 @@
         {
             "showDevDebugOutput": "parsed",
             "cwd": "${workspaceRoot}",
-            "executable": "./build/STM103.elf",
+            "executable": "./build/orange_pi_mezz_hal.elf",
             "name": "Attach STM32",
             "request": "attach",
             "type": "cortex-debug",
             "servertype": "openocd",
             "preLaunchTask": "Build STM",
-            "device": "stm32f103x6.s",
+            "device": "stm32f401xc.s",
             "configFiles": [
                 "openocd.cfg"
             ]
