@@ -1,10 +1,11 @@
 #include "main.h"
 #include <stdint.h>
+#include "FreeRTOS.h"
+#include "task.h"
 
 #include "stm32f4xx.h"
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
-
 
 // Функция программной задержки
 void Soft_Delay(volatile uint32_t number)
@@ -12,8 +13,7 @@ void Soft_Delay(volatile uint32_t number)
   while(number--);
 }
 
-
-int main (void) 
+void blink(void *pvParameters)
 {
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
   GPIO_InitTypeDef  ledinit;  // создаем структуру
@@ -25,13 +25,22 @@ int main (void)
   ledinit.GPIO_Pin = GPIO_Pin_13; // Светодиод на 15м выводе
 
   GPIO_Init(GPIOC, &ledinit);
-  
-  while(1) 
+  while(1)
   {
     GPIO_SetBits(GPIOC, GPIO_Pin_13);
-    Soft_Delay(0x000FFFFF);
+    Soft_Delay(0x00FFFFFF);
     GPIO_ResetBits(GPIOC, GPIO_Pin_13);
-    Soft_Delay(0x000FFFFF);
+    Soft_Delay(0x00FFFFFF);
+  }
+}
+
+int main (void) 
+{
+  xTaskCreate(blink, "Blink", 128, NULL, 2, NULL);
+  vTaskStartScheduler();
+  while(1) 
+  {
+    
   }
 }
 
@@ -44,6 +53,16 @@ void Error_Handler(void)
   {
   }
   /* USER CODE END Error_Handler_Debug */
+}
+
+void vApplicationTickHook()
+{
+
+}
+
+void vApplicationStackOverflowHook(TaskHandle_t handle, char *name) {
+(void)handle;
+	for (;;){}
 }
 
 #ifdef  USE_FULL_ASSERT
