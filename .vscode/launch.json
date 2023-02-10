@@ -7,7 +7,7 @@
     {
     "name": "Debug J-Link",
     "cwd": "${workspaceRoot}",
-    "executable": "${workspaceRoot}/build/src/Appd.elf",
+    "executable": "${workspaceRoot}/build/Appd.elf",
     "request": "launch",
     "type": "cortex-debug",
     "runToEntryPoint": "main",
