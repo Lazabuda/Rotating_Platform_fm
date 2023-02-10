@@ -10,21 +10,21 @@
 void blink(void *pvParameters)
 {
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
-  GPIO_InitTypeDef  ledinit;  // создаем структуру
+  GPIO_InitTypeDef  GPIO_InitStructure;  // создаем структуру
 
-  ledinit.GPIO_Mode = GPIO_Mode_OUT;  // направление - выход
-  ledinit.GPIO_OType = GPIO_OType_PP;  // Двухтактный выход
-  ledinit.GPIO_PuPd = GPIO_PuPd_NOPULL;  // Без подтяжки
-  ledinit.GPIO_Speed = GPIO_Speed_2MHz;  // Скорость низкая
-  ledinit.GPIO_Pin = GPIO_Pin_13; // Светодиод на 15м выводе
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;  // направление - выход
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;  // Двухтактный выход
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;  // Без подтяжки
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;  // Скорость низкая
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13; // Светодиод на 15м выводе
 
-  GPIO_Init(GPIOC, &ledinit);
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
   while(1)
   {
     GPIO_SetBits(GPIOC, GPIO_Pin_13);
-    Soft_Delay(0x00FFFFFF);
+	  vTaskDelay(100);
     GPIO_ResetBits(GPIOC, GPIO_Pin_13);
-    Soft_Delay(0x00FFFFFF);
+	  vTaskDelay(100);
   }
 }
 
