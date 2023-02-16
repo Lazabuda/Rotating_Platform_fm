@@ -1,4 +1,6 @@
 
+/*
+
 // TIM4 - APB1 42 MHz
 static void TIM4_config()
 {
@@ -44,6 +46,8 @@ static void HardwareSetup()
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;  // Двухтактный выход
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;  // Без подтяжки
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;  // Скорость низкая
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13; // Светодиод на 15м выводе
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13; // Светодиод на 13м выводе
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
 }
+
+*/
