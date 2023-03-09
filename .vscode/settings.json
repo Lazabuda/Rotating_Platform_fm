@@ -4,5 +4,10 @@
     "cmake.configureArgs": [
     "-DENABLE_SELFTEST:BOOL=ON"
     ],
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "*.txt": "c",
+        "stm32f4xx_rcc.h": "c"
+    },
    }
    

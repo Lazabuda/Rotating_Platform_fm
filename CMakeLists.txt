@@ -61,17 +61,22 @@ set(FREERTOS_SRC
         "Libraries/FreeRTOS/src/port.c"
         "Libraries/FreeRTOS/src/heap_3.c")
 		
+#set(MY_LIBS_SRC_PATH "Libraries/My_libs/")
+#set(HAL_LL_SRC
+#        "${MY_LIBS_SRC_PATH}/src/hardware.c")
 
 set(COMMON_SRC ${HAL_LL_SRC} ${FREERTOS_SRC})
 
 set(HAL_LL_INC "${HAL_LL_SRC_PATH}/inc")
 set(CMSIS_INC "Libraries/CMSIS/Include" "Libraries/CMSIS/Device/ST/STM32F4xx/Include")
 set(FREERTOS_INC "Libraries/FreeRTOS/inc")
+#set(MY_LIBS_INC "Libraries/My_libs/inc")
 set(APP_INC "include")
 
 include_directories(${CMSIS_INC})
 include_directories(${HAL_LL_INC})
 include_directories(${FREERTOS_INC})
+#include_directories(${MY_LIBS_INC})
 include_directories(${APP_INC})
 
 
@@ -91,7 +96,7 @@ set(PROJECT_SRC
         src/main.c        
         src/stm32f4xx_it.c
         src/system_stm32f4xx.c
-        
+        src/hardware.c
         src/startup_stm32f401xc.s
         )
 

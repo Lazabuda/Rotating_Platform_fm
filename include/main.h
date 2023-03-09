@@ -8,6 +8,16 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 #include "system_stm32f4xx.h"
+#include "stdint.h"
+#include "FreeRTOS.h"
+#include "FreeRTOSConfig.h"
+#include "task.h"
+#include "stm32f4xx_conf.h"
+#include "stm32f4xx_rcc.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "string.h"
+#include <stm32f4xx_gpio.h>
 
 void Error_Handler(void);
 
