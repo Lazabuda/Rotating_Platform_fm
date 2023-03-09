@@ -1,6 +1,16 @@
 #include "main.h"
 #include "hardware.h"
 
+void testUART(void *pvParameters)
+{
+  UART_init();
+  while (1)
+  {
+    USART1_send(100);
+    vTaskDelay(200);
+  }
+}
+
 void blink(void *pvParameters)
 {
   Init_TIM2();
@@ -26,6 +36,7 @@ void blink(void *pvParameters)
 int main (void) 
 {
   xTaskCreate(blink, "Blink", 128, NULL, 2, NULL);
+  xTaskCreate(testUART, "testUart", 128, NULL, 2, NULL);
   vTaskStartScheduler();
   while(1) 
   {
