@@ -97,6 +97,7 @@ set(PROJECT_SRC
         src/stm32f4xx_it.c
         src/system_stm32f4xx.c
         src/hardware.c
+        src/HX711.c
         src/startup_stm32f401xc.s
         )
 

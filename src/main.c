@@ -1,12 +1,17 @@
 #include "main.h"
 #include "hardware.h"
+#include "HX711.h"
 
-void testUART(void *pvParameters)
+uint32_t read_value = 0;
+
+void weighting(void *pvParameters)
 {
+  HX711_init();
   UART_init();
   while (1)
   {
-    USART1_send(100);
+    read_value = get_weight();
+    USART1_send(read_value);
     vTaskDelay(200);
   }
 }
@@ -26,17 +31,21 @@ void blink(void *pvParameters)
   GPIO_Init(GPIOC, &ledinit);
   while(1)
   {
-    GPIO_SetBits(GPIOC, GPIO_Pin_13);
-    Delay(30000);
-    GPIO_ResetBits(GPIOC, GPIO_Pin_13);
-    Delay(30000);
+    if (read_value > 8000000)
+    {
+      GPIO_SetBits(GPIOC, GPIO_Pin_13);
+    }
+    else
+    {
+      GPIO_ResetBits(GPIOC, GPIO_Pin_13);
+    }
   }
 }
 
 int main (void) 
 {
   xTaskCreate(blink, "Blink", 128, NULL, 2, NULL);
-  xTaskCreate(testUART, "testUart", 128, NULL, 2, NULL);
+  xTaskCreate(weighting, "weighting", 128, NULL, 2, NULL);
   vTaskStartScheduler();
   while(1) 
   {
