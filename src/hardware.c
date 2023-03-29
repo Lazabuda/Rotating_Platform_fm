@@ -83,3 +83,31 @@ void USART1_send (uint32_t data)
   }
   USART1->DR = *new_line;
 }
+
+void i2c_init()
+{
+  //GPIO INIT
+  GPIO_InitTypeDef GPIO_InitStructure;
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);	// GPIOB BUS enable
+  RCC_AHB1PeriphClockCmd(RCC_APB1ENR_I2C1EN, ENABLE);	// I2C enable
+
+  GPIO_InitStruct.GPIO_Pin = I2C_DATA;
+  GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
+  GPIO_InitStruct.GPIO_OType = GPIO_OType_OD;
+  GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
+  GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
+  GPIO_Init(I2C_PORT, &GPIO_InitStruct);
+
+  GPIO_InitStruct.GPIO_Pin = I2C_CLK;
+  GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
+  GPIO_InitStruct.GPIO_OType = GPIO_OType_OD;
+  GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
+  GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
+  GPIO_Init(I2C_PORT, &GPIO_InitStruct);
+
+  GPIO_PinAFConfig(I2C_PORT, GPIO_PinSource6, GPIO_AF_I2C1); //SCL
+  GPIO_PinAFConfig(I2C_PORT, GPIO_PinSource7, GPIO_AF_I2C1); //SDA
+
+
+
+}

@@ -1,10 +1,18 @@
+/*
+--- Here will be the description of the firmware ---
+*/
+
+//-----------Includes, defines, global variables-------------
+
 #include "main.h"
 #include "hardware.h"
 #include "HX711.h"
 
-uint32_t read_value = 0;
+uint32_t read_value = 0; // 32 bit value from ADC (Load Cell)
 
-void weighting(void *pvParameters)
+//------------------FreeRTOS functions------------------------
+
+void weighting(void *pvParameters) // Get values from ADC and send them to the UART1
 {
   HX711_init();
   UART_init();
@@ -16,7 +24,7 @@ void weighting(void *pvParameters)
   }
 }
 
-void blink(void *pvParameters)
+void blink(void *pvParameters) // Init the C13 LED and turn the LED on in particular condition
 {
   Init_TIM2();
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
@@ -52,6 +60,8 @@ int main (void)
     
   }
 }
+
+//---------------------------SERVICE FUNCTIONS-----------------------------------
 
 void Error_Handler(void)
 {
