@@ -1,2 +1,1 @@
-# clear_stm32_project
-clear_stm32_project (just Blink PC13 LED) with CMake
+# Firmware of Rotating Platform for MSCL-XYZ system
